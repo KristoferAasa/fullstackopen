@@ -28,6 +28,8 @@ const App = () => {
 
   const getMostVotedIndex = () => votes.indexOf(Math.max(...votes));
 
+  const getIsNoneVoted = () => votes.every((vote) => vote === 0);
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
@@ -36,9 +38,13 @@ const App = () => {
       <button onClick={voteAnecdote}>Vote</button>
       <button onClick={getNextAnecdote}>Next Anecdote</button>
 
-      <h1>Anecdote with most votes</h1>
-      <p>{anecdotes[getMostVotedIndex()]}</p>
-      <p>has {votes[getMostVotedIndex()]} votes</p>
+      {!getIsNoneVoted() && (
+        <div>
+          <h1>Anecdote with most votes</h1>
+          <p>{anecdotes[getMostVotedIndex()]}</p>
+          <p>has {votes[getMostVotedIndex()]} votes</p>
+        </div>
+      )}
     </div>
   );
 };
